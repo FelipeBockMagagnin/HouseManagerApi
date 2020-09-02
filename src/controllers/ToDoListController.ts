@@ -1,5 +1,5 @@
-module.exports = {
-  index (request, response) {
+class TodoList {
+  index(request, response) {
     const todolist = [
       {
         name: 'carlos',
@@ -19,3 +19,5 @@ module.exports = {
     return response.json(todolist)
   }
 }
+
+export default TodoController
