@@ -1,4 +1,4 @@
-class TodoList {
+class TodoController {
   index(request, response) {
     const todolist = [
       {
