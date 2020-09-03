@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/FelipeBockMagagnin/HouseManager-Api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.5",
+    "pg": "^8.3.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.8",
