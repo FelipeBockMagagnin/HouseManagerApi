@@ -3,6 +3,7 @@ import db from '../../data/db'
 
 export default class TodoController {
   async index(req: Request, res: Response) {
+    console.log('get');
     const todos = await db("todolist").select('*');
 
     if(todos === undefined){
@@ -13,11 +14,13 @@ export default class TodoController {
   }
 
   async create(req: Request, res: Response) {
-    const { title, name, description } = req.body;
+    console.log('create');
+
+    const { title, check, description } = req.body;
 
     const [id] = await db('todolist').insert({
       "title": title,
-      "name": name,
+      "check": check,
       "description": description
     }).returning('id');
 
@@ -25,6 +28,8 @@ export default class TodoController {
   }
 
   async delete(req: Request, res: Response){
+    console.log('delete');
+
     const { id } = req.params;
 
     const todo = await db("todolist")
