@@ -2,49 +2,49 @@ import { Request, Response } from 'express'
 import db from '../../data/db'
 
 export default class TodoController {
-  async index(req: Request, res: Response) {
-    console.log('get');
-    const todos = await db("todolist").select('*');
+  async index (req: Request, res: Response): Promise<Response<any>> {
+    console.log('get')
+    const todos = await db('todolist').select('*')
 
-    if(todos === undefined){
+    if (todos === undefined) {
       return res.status(404).send()
     }
 
-    return res.status(200).json(todos);
+    return res.status(200).json(todos)
   }
 
-  async create(req: Request, res: Response) {
-    console.log('create');
+  async create (req: Request, res: Response): Promise<Response<any>> {
+    console.log('create')
 
-    const { title, check, description } = req.body;
+    const { title, check, description } = req.body
 
     const [id] = await db('todolist').insert({
-      "title": title,
-      "check": check,
-      "description": description
-    }).returning('id');
+      title: title,
+      check: check,
+      description: description
+    }).returning('id')
 
-    return res.json({ id });
+    return res.json({ id })
   }
 
-  async delete(req: Request, res: Response){
-    console.log('delete');
+  async delete (req: Request, res: Response): Promise<Response<any>> {
+    console.log('delete')
 
-    const { id } = req.params;
+    const { id } = req.params
 
-    const todo = await db("todolist")
-      .where("id", id)
-      .select("id")
-      .first();
+    const todo = await db('todolist')
+      .where('id', id)
+      .select('id')
+      .first()
 
-    if(todo == undefined){
-      return res.status(404).send();
+    if (todo === undefined) {
+      return res.status(404).send()
     }
 
-    await db("todolist")
-      .where("id", id)
-      .delete();
+    await db('todolist')
+      .where('id', id)
+      .delete()
 
-    return res.status(204).send();
+    return res.status(204).send()
   }
 }
